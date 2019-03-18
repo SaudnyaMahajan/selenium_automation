@@ -201,6 +201,7 @@ public class KeyWordEngine {
 							   try{
 								driver.navigate().refresh();
 								result=we.isDisplayed();
+								
 								}catch(Exception ex){
 		                     ex.printStackTrace();
 		                     throw new StaleElementReferenceException("Throwing stale element exception");
