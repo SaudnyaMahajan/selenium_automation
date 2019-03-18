@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="79297" started-at="2019-03-17T20:11:52Z" finished-at="2019-03-17T20:13:11Z">
+  <suite name="Default suite" duration-ms="241108" started-at="2019-03-18T08:33:22Z" finished-at="2019-03-18T08:37:23Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="79297" started-at="2019-03-17T20:11:52Z" finished-at="2019-03-17T20:13:11Z">
+    <test name="Default test" duration-ms="241108" started-at="2019-03-18T08:33:22Z" finished-at="2019-03-18T08:37:23Z">
       <class name="com.qa.gap.testExecution.GmailTest">
-        <test-method status="PASS" signature="gmailTest()[pri:0, instance:com.qa.gap.testExecution.GmailTest@2ac273d3]" name="gmailTest" duration-ms="79069" started-at="2019-03-17T20:11:52Z" finished-at="2019-03-17T20:13:11Z">
+        <test-method status="PASS" signature="gmailTest()[pri:0, instance:com.qa.gap.testExecution.GmailTest@20398b7c]" name="gmailTest" duration-ms="241048" started-at="2019-03-18T08:33:22Z" finished-at="2019-03-18T08:37:23Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- gmailTest -->

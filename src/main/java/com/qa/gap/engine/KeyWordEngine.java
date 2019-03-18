@@ -13,6 +13,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -37,6 +39,7 @@ public class KeyWordEngine {
 	public WebElement we;
 	
 	WebDriverWait wait ; 
+	Logger logger= Logger.getLogger("KeyWordEngine");
 	
 	
 	public final String testScenarioFile_Path= "C:/GmailTest_workspace/Gmail_Automation_Project/src/main/java/com/qa/gap/testScenarios/keywords.xlsx";
@@ -98,13 +101,16 @@ public class KeyWordEngine {
 			}else if(actions.equalsIgnoreCase("enter Url")){
 				
             	if(value.isEmpty()||value.equals("NA")){
+            		logger.info("entering url");
             		driver.get(prop.getProperty("url"));
             		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
             	}else{
+            		logger.info("entering url");
             		driver.get(value);
             	}		
 			}else if(actions.equalsIgnoreCase("quit")){
 				driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
+				logger.info("Closing browser");
 				int Counter=0;
 						do
 						{
@@ -175,7 +181,6 @@ public class KeyWordEngine {
         		 try{
         		 driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
         		 we.clear();
-        		 //driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);   
 				 we.sendKeys(value);
         		 }catch(Exception e){
         			 try{
@@ -194,13 +199,14 @@ public class KeyWordEngine {
 					we.click();
 					driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				}else if(actions.equalsIgnoreCase("Check existance")&& test_step.equalsIgnoreCase("Verify successful login of user")){
-					driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+					driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 					try{
 					result=we.isDisplayed();
 					}catch(Exception e){
 							   try{
 								driver.navigate().refresh();
 								result=we.isDisplayed();
+								
 								}catch(Exception ex){
 		                     ex.printStackTrace();
 		                     throw new StaleElementReferenceException("Throwing stale element exception");
@@ -208,49 +214,59 @@ public class KeyWordEngine {
 							}
 					if(result){
 						System.out.println("user logged in successfully");
+						logger.info("user logged in successfully");
 						File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 						   File targetFile = new File("C:/GmailTest_workspace/Gmail_Automation_Project/src/main/java/com/qa/gap/screenshots" + "ScreenPrint.jpg");
 						   FileUtils.copyFile(screenshot, targetFile);
 					}else{
-						System.out.println("error in login operation");
+						logger.info("error in login operation");
 					}
 				}else if(actions.equalsIgnoreCase("Check existance")&& test_step.equalsIgnoreCase("confirm email sent")){
-					driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+					driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 					result=we.isDisplayed();
 					if(result){
 						System.out.println("Message sent successfully");
+						logger.info("Message sent successfully");
 					}else{
 						System.out.println("error in snding Message");
+						logger.info("error in snding Message");
 					}
 				}else if(actions.equalsIgnoreCase("Check existance")&& test_step.equalsIgnoreCase("Check mail from first user in inbox")){
-					driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+					driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 					result=we.isDisplayed();
 					if(result){
 						System.out.println("Mail recieved from first user");
+						logger.info("Mail recieved from first user");
 					}else{
 						driver.findElement(By.xpath("//div[@class='asa']/div[@class='asf T-I-J3 J-J5-Ji']")).click();
 						boolean tempRes=we.isDisplayed();
 						if(tempRes){
 							System.out.println("Mail recieved from first user");
+							logger.info("Mail recieved from first user");
 						}else{
 						System.out.println("error in receiving Mail");
+						logger.info("error in receiving Mail");
 						}
 					}
 				}else if(actions.equalsIgnoreCase("Check existance")&& test_step.equalsIgnoreCase("Check subject of email")){
-					driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+					driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 					result=we.isDisplayed();
 					if(result){
 						System.out.println("subject matches with first users mail subject");
+						logger.info("subject matches with first users mail subject");
 					}else{
 						System.out.println("subject content doesnt match");
+						logger.info("subject content doesnt match");
 					}
 				}else if(actions.equalsIgnoreCase("getText")){
-					driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+					driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 					String text=we.getText().trim();
 					if(text.equals(value.trim())){
 						System.out.println("Mail body matches");
+						logger.info("Mail body matches");		
 					}else{
 						System.out.println("Mail body doesnt match");
+						logger.info("Mail body doesnt match");
 					}
 				}
         	 locatorName=null;
@@ -273,8 +289,7 @@ public class KeyWordEngine {
 			e.printStackTrace();
 			
 		}
-			
-			
+				
 			
 		}
 
