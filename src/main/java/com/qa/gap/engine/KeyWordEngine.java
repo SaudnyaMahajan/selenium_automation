@@ -198,20 +198,14 @@ public class KeyWordEngine {
 					try{
 					result=we.isDisplayed();
 					}catch(Exception e){
-						 int Counter=0;
-							do{
 							   try{
-								if(we.isEnabled()){
-								Counter=Counter+1;
+								driver.navigate().refresh();
 								result=we.isDisplayed();
-								break;
-								}
-							   }catch(Exception ex){
+								}catch(Exception ex){
 		                     ex.printStackTrace();
 		                     throw new StaleElementReferenceException("Throwing stale element exception");
 								}
-							}while(Counter == 0);
-						  }
+							}
 					if(result){
 						System.out.println("user logged in successfully");
 						File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
