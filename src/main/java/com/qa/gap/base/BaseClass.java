@@ -4,24 +4,36 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+//import com.qa.gap.logs.LoggerClass;
 
 public class BaseClass {
     
 	public WebDriver driver;
 	public Properties prop;
 	
+	//LoggerClass loggerClass;
+	Logger logger= Logger.getLogger("BaseClass");
+	
 	public WebDriver initialiseBrowser(String browserName){
 		if(browserName.equalsIgnoreCase("Chrome")){
 			System.setProperty("webdriver.chrome.driver", "//C:/GmailTest_workspace/Gmail_Automation_Project/lib/chromedriver.exe");
 			driver= new ChromeDriver();	
+			logger.info("opening Chrome browser");
 			driver.manage().window().maximize();
+			logger.info("Maximising window");
 		}else{
 			System.setProperty("webdriver.gecko.driver", "//C:/GmailTest_workspace/Gmail_Automation_Project/lib/geckodriver.exe");
 			driver= new FirefoxDriver();
+			logger.info("opening Firefox browser");
 			driver.manage().window().maximize();
+			logger.info("Maximising window");
 		}
 		return driver;
 	}
@@ -41,5 +53,7 @@ public class BaseClass {
 	   
    }
 	
-	
+  private void PropertyConfigurat() {
+        PropertyConfigurator.configure("log4j.properties");
+	}
 }
